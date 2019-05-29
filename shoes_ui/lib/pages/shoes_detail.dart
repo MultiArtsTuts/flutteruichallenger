@@ -36,40 +36,240 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: true,
+      
       backgroundColor: Color(0xFF1B2330),
       body: Stack(
-        alignment: Alignment.bottomCenter,
         children: <Widget>[
-          // Background
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: ClipPath(
-              clipper: MyClipper(),
-              child: Container(
-                padding: EdgeInsets.only(top: 60, left: 20, right: 20),
-                alignment: Alignment.center,
-                height: 330,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(0xFF55647C),
-                ),
-                child: Image.asset(
-                  'assets/images/nike-logo.png',
-                  color: Color(0xFF515C73),
-                  width: 300,
-                ),
+          ClipPath(
+            clipper: MyClipper(),
+            child: Container(
+              padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+              alignment: Alignment.center,
+              height: 330,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Color(0xFF55647C),
+              ),
+              child: Image.asset(
+                widget.shoes.brandImage,
+                color: Color(0xFF515C73),
+                width: 300,
+              ),
+            ),
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(top: 60),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // Background      
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          widget.shoes.title,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500
+                          ),
+                        ),
+                        Text(
+                          "270",
+                          style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                  //  color: Colors.yellow.withOpacity(.3),
+                    height: 200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        // Images
+                        Container(
+                          height: 170,
+                          child: _images()
+                          /* TransformerPageView(
+                            pageController: _pageController,
+                            transformer: ZoomOutPageTransformer(),
+                            itemCount: widget.shoes.pictures.length,
+                            itemBuilder: (context, i){
+                              var images = widget.shoes.pictures;
+                              return Align(
+                                alignment: Alignment.topRight,
+                                child: Image.asset(
+                                images[i],
+                                width: 400,
+                                height: 190, 
+                                ),
+                              );                                             
+                            },
+                          ), */
+                        ),
+                        SizedBox(height: 15,),                  
+                        PageIndicator(
+                          controller: _pageController,
+                          currentIndex: currentPage,
+                          pageCount: widget.shoes.pictures.length,
+                          onPageSelected: (int page){
+                            _pageController.animateToPage(
+                              page,
+                              duration: _kDuration, 
+                              curve: _kCurve
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+//              height: 200,
+                    padding: EdgeInsets.only(top: 3, bottom: 3, left: 18, right: 18),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              height: 25,
+                              child: Chip(
+                                padding: EdgeInsets.only(bottom:5),
+                                elevation: 5,
+                                label: Text(
+                                  'Em estoque',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Color(0xFF1B2330),
+                                    fontWeight: FontWeight.w700
+                                  ),
+                                ),
+                                backgroundColor: Color(0xFF84ECB9),
+                                shadowColor: Color(0xFF84ECB9),
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                text: 'R\$',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  fontFamily: 'Roboto',
+                                  color: Colors.blueGrey
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: '${widget.shoes.price}',
+                                    style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w300,
+                              ),
+                                  )
+                                ]
+                              ),
+                            ),
+                            
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              widget.shoes.colors,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              widget.shoes.description,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w300,
+                                shadows: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 1,
+                                    offset: Offset(1, 2)
+                                  )
+                                ]
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            Text(
+                              'Size guide'.toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10
+                              ),
+                            ),
+                            Container(
+                              // color: Colors.deepPurple,
+                              height: 150,
+                              width: double.infinity,
+                              child: _sizes()
+                            ),
+                            SizedBox(height: 30,),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Container(
+                                  width: 130,
+                                    padding: EdgeInsets.all(8),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Text(
+                                          "Add to Bag",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w300
+                                          ),
+                                        ),Text(
+                                          "+",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w200
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    color: Colors.deepOrange,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           ),
           // Top
           Positioned(
-            top: 10,
+            top: 0,
             left: 0,
             right: 0,
             child: Container(
-              // color: Colors.red.withOpacity(.2),
+              color: Colors.red.withOpacity(.8),
               height: 60,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,213 +288,6 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
               ),
             ),
           ),
-          Positioned(
-            top: 70,
-            left: 0,
-            right: 0,
-            child:  Container(
-              padding: EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    widget.shoes.title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500
-                    ),
-                  ),
-                  Text(
-                    "270",
-                    style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: 110,
-            left: 0,
-            right: 0,
-            child: Container(
-            //  color: Colors.yellow.withOpacity(.3),
-              height: 200,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  // Images
-                  Container(
-                    height: 170,
-                    child: _images()
-                    /* TransformerPageView(
-                      pageController: _pageController,
-                      transformer: ZoomOutPageTransformer(),
-                      itemCount: widget.shoes.pictures.length,
-                      itemBuilder: (context, i){
-                        var images = widget.shoes.pictures;
-                        return Align(
-                          alignment: Alignment.topRight,
-                          child: Image.asset(
-                          images[i],
-                          width: 400,
-                          height: 190, 
-                          ),
-                        );                                             
-                      },
-                    ), */
-                  ),
-                  SizedBox(height: 15,),                  
-                  PageIndicator(
-                    controller: _pageController,
-                    currentIndex: currentPage,
-                    pageCount: widget.shoes.pictures.length,
-                    onPageSelected: (int page){
-                      _pageController.animateToPage(
-                        page,
-                        duration: _kDuration, 
-                        curve: _kCurve
-                      );
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: 330,
-            left: 0,
-            right: 0,
-            child: Container(
-//              height: 200,
-              padding: EdgeInsets.only(top: 3, bottom: 3, left: 18, right: 18),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.all(5),
-                        child: Text(
-                          "IN STOCK",
-                          style: TextStyle(
-                            fontSize: 8,
-                            color: Color(0xFF1B2330),
-                            fontWeight: FontWeight.w700
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          color: Color(0xFF84ECB9),
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: 'R\$',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            fontFamily: 'Roboto',
-                            color: Colors.blueGrey
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: '${widget.shoes.price}',
-                              style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w300,
-                        ),
-                            )
-                          ]
-                        ),
-                      ),
-                      
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        widget.shoes.colors,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500
-                        ),
-                      ),
-                      SizedBox(height: 5,),
-                      Text(
-                        widget.shoes.description,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                          shadows: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 1,
-                              offset: Offset(1, 2)
-                            )
-                          ]
-                        ),
-                      ),
-                      SizedBox(height: 20,),
-                      Text(
-                        'Size guide'.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10
-                        ),
-                      ),
-                      Container(
-                        // color: Colors.deepPurple,
-                        height: 120,
-                        width: double.infinity,
-                        child: _sizes()
-                      ),
-                      SizedBox(height: 30,),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
-                          child: Container(
-                            width: 130,
-                              padding: EdgeInsets.all(8),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    "Add to Bag",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w300
-                                    ),
-                                  ),Text(
-                                    "+",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w200
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              color: Colors.deepOrange,
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            )
-          )
         ],
       ),
     );

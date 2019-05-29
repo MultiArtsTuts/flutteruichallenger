@@ -2,7 +2,8 @@ class Shoes {
   final String title;
   final String description;
   final String colors;
-  final String image;
+  final String brandTitle;
+  final String brandImage;
   final double price;
   final List<String> sizeNumList;
   final List<String> pictures;
@@ -13,7 +14,8 @@ class Shoes {
       {this.title,
       this.description,
       this.colors,
-      this.image,
+      this.brandTitle,
+      this.brandImage,
       this.price,
       this.sizeNumList,
       this.pictures})
@@ -23,7 +25,8 @@ class Shoes {
       {String title,
       String description,
       String colors,
-      String image,
+      String brandTitle,
+      String brandImage,
       double price,
       List sizeNumList,
       List pictures}) {
@@ -31,7 +34,8 @@ class Shoes {
       title: title ?? this.title,
       description: description ?? this.description,
       colors: colors ?? this.colors,
-      image: image ?? this.image,
+      brandTitle: brandTitle ?? this.brandTitle,
+      brandImage: brandImage ?? this.brandImage,
       price: price ?? this.price,
       sizeNumList: sizeNumList ?? this.sizeNumList,
       pictures: pictures ?? this.pictures,
