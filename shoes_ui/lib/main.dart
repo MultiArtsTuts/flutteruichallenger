@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show debugDefaultTargetPlatformOverride;
+import 'package:flutter/services.dart';
 import 'package:shoes_ui/pages/home_page.dart';
 
 void main() {
   debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.blue,
+    statusBarColor: Colors.pink,
+  ));
   runApp(MyApp());
 }
 

@@ -6,6 +6,7 @@ import 'package:shoes_ui/model/shoes_model.dart';
 import 'package:shoes_ui/pages/shoes_detail.dart';
 import 'package:shoes_ui/utils/transformers.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,6 +35,20 @@ class _HomePageState extends State<HomePage> {
         ],
       ), */
       body: ProductDetail(),
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.amber[200],
+        color: Colors.grey[100],
+        height: 50,
+        items: <Widget>[
+          Icon(Icons.home, size: 30),
+          Icon(Icons.list, size: 30),
+          Icon(Icons.shopping_basket, size: 30),
+          Icon(Icons.person_outline, size: 30),
+        ],
+        onTap: (index) {
+          //Handle button tap
+        },
+      ),
     );
   }
 }
@@ -51,7 +66,7 @@ class _ProductDetailState extends State<ProductDetail> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    // SystemChrome.setEnabledSystemUIOverlays([]);
     _pageController = PageController(viewportFraction: .95);
   }
 
@@ -65,7 +80,7 @@ class _ProductDetailState extends State<ProductDetail> {
               colors: [
                 // Color(0xFF1B2330),
                 Colors.grey[300],
-                Colors.orangeAccent[100],
+                Colors.amber[200],
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -78,9 +93,11 @@ class _ProductDetailState extends State<ProductDetail> {
         ),
         SafeArea(
           child: SingleChildScrollView(
+            padding: EdgeInsets.only(top: 18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                SizedBox(height: 25,),
                 Container(
                   width: double.infinity,
                   height: 150,
@@ -140,8 +157,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               brand.brandImage,
                               fit: BoxFit.fitWidth,
                               color: Colors.grey[600],
-                              width: 20,
-                              height:20
+                              
                             ),
                           ),
                         ),
@@ -204,7 +220,7 @@ class _ProductDetailState extends State<ProductDetail> {
           ),
         ),
         Positioned(
-          top: 0,
+          top: 15,
           left: 0,
           right: 0,
           child: Container(
@@ -215,6 +231,13 @@ class _ProductDetailState extends State<ProductDetail> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Icon(Icons.menu, color: Colors.grey[600]),
+                Text(
+                  'Flutter Shoes Concept',
+                  style: TextStyle(
+                    fontSize: 19,
+                    color: Colors.grey[600],
+                  ),
+                ),
                 Container(
                   // color: Colors.orangeAccent,
                   width: MediaQuery.of(context).size.width * .2,

@@ -70,7 +70,7 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
           ),
           SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(top: 60),
+              padding: EdgeInsets.only(top: 50),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -275,7 +275,7 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
           ),
           // Top
           Positioned(
-            top: 0,
+            top: 15,
             left: 0,
             right: 0,
             child: Container(
@@ -286,11 +286,18 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
                   IconButton(
                     icon: Icon(Icons.arrow_back_ios,
                       color: Colors.blueGrey[100],
-                      size: 16,
+                      size: 18,
                     ),
                     onPressed: (){
                       Navigator.of(context).pop(context);
                     }
+                  ),
+                  Text(
+                    '${widget.shoes.title}',
+                    style: TextStyle(
+                      color: Colors.grey[200],
+                      fontSize: 18
+                    ),
                   ),
                   IconButton(
                     icon: Icon(Icons.search, color: Colors.blueGrey[100],size: 18,),
