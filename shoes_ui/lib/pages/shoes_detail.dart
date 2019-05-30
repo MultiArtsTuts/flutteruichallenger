@@ -36,7 +36,7 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomPadding: false,
       
       backgroundColor: Color(0xFF1B2330),
       body: Stack(
@@ -57,6 +57,16 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
                 width: 300,
               ),
             ),
+          ),
+          Positioned(
+            bottom: -85,
+            right: -95,
+            child: Image.asset(
+                widget.shoes.brandImage,
+                color: Color(0xFF515C73).withOpacity(.05),
+                width: 400,
+                height: 300,
+              ),
           ),
           SafeArea(
             child: SingleChildScrollView(
@@ -269,13 +279,15 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
             left: 0,
             right: 0,
             child: Container(
-              color: Colors.red.withOpacity(.8),
               height: 60,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: Colors.blueGrey[100], size: 16,),
+                    icon: Icon(Icons.arrow_back_ios,
+                      color: Colors.blueGrey[100],
+                      size: 16,
+                    ),
                     onPressed: (){
                       Navigator.of(context).pop(context);
                     }
@@ -299,11 +311,14 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
       controller: _pageController,
       children: images.map((img){
         return SizedBox(
-          child: Image.asset(
-            img,
-            width: 400,
-            height: 190,
-            fit: BoxFit.contain,
+          child: Hero(
+            tag: widget.shoes.title,
+            child: Image.asset(
+              img,
+              width: 400,
+              height: 190,
+              fit: BoxFit.contain,
+            ),
           ),
         );
       }).toList(),

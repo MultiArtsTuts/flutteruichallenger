@@ -45,7 +45,6 @@ class ShoesList {
         "28","32","36","47","42","38","40"
       ],
       pictures: [
-        "assets/images/products/reebok/reebok.png",
         "assets/images/nike-free.png",
         "assets/images/nike.png",
         "assets/images/nike-jordan.png",
@@ -54,7 +53,7 @@ class ShoesList {
     Shoes(
       brandTitle: 'Puma',
       brandImage: "assets/images/brand/puma.png",
-      title: "Nike Air Max Sneakers Shoe Air Jordan",
+      title: "Nike Air Max Sneakers Shoe Air Jordans",
       description: "Be Bold with Nike Air Max 270, featured fresh new materials, head turning colourrways, and Nike\'s tallest Air units ever",
       colors: "Red/White",
       price: 170,
@@ -62,8 +61,24 @@ class ShoesList {
         "28","32","36","47","42","38","40"
       ],
       pictures: [
-        "assets/images/products/reebok/reebok.png",
         "assets/images/nike-free.png",
+        "assets/images/nike.png",
+        "assets/images/nike-jordan.png",
+      ]
+    ),
+    Shoes(
+      brandTitle: 'Adidas',
+      brandImage: "assets/images/brand/adidas-icon.png",
+      title: "Adidas Energy Boost 3",
+      description: "Be Bold with Adidas didas 270, featured fresh new materials, head turning colourrways, and Nike\'s tallest Air units ever",
+      colors: "Laranja/Rosa/Vermelhos",
+      price: 170,
+      sizeNumList: [
+        "28","32","36","47","42","38","40"
+      ],
+      pictures: [
+        "assets/images/products/adidas/1.png",
+        "assets/images/products/adidas/2.png",
         "assets/images/nike.png",
         "assets/images/nike-jordan.png",
       ]

@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
+      /* appBar: AppBar(
         title: Text(
           "Nike Air Max Collection",
           style: TextStyle(
@@ -26,11 +26,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         elevation: 0,
+        backgroundColor: Colors.transparent,
+        toolbarOpacity: .5,
         leading: Icon(Icons.menu),
         actions: <Widget>[
           Icon(Icons.search)
         ],
-      ),
+      ), */
       body: ProductDetail(),
     );
   }
@@ -61,24 +63,29 @@ class _ProductDetailState extends State<ProductDetail> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF1B2330),
-                Color(0xFFFFFFFF)
+                // Color(0xFF1B2330),
+                Colors.grey[300],
+                Colors.orangeAccent[100],
               ],
-              begin: Alignment.topLeft,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              tileMode: TileMode.clamp
+              /* begin: Alignment.topLeft,
               end: Alignment.center,
-              stops: [.7,0]
+              stops: [.7,0] */
             )
           ), 
         ),
         SafeArea(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                   width: double.infinity,
                   height: 150,
-                  color: Colors.grey[200],
                   margin: EdgeInsets.only(bottom: 20),
+                  child: Image.asset('assets/images/nike.png', fit: BoxFit.fitHeight,),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left:8, right: 8),
@@ -120,15 +127,15 @@ class _ProductDetailState extends State<ProductDetail> {
                             setState((){});
                           },
                           child: Chip(
-                            backgroundColor: _selectedIndex == i ? Colors.yellowAccent : Colors.grey[200],
+                            backgroundColor: _selectedIndex == i ? Colors.grey[300] : Colors.grey[50],
                             padding: EdgeInsets.only(left: 8, right: 8),
                             label: Text(
                               brand.brandTitle,
                               style: TextStyle(
-                                color: _selectedIndex == i ? Colors.grey[200] : Colors.grey[500]
+                                color: _selectedIndex == i ? Colors.grey[600] : Colors.grey[500]
                               ),
                             ),
-                            elevation: 6,
+                            elevation: 4,
                             avatar: Image.asset(
                               brand.brandImage,
                               fit: BoxFit.fitWidth,
@@ -142,8 +149,25 @@ class _ProductDetailState extends State<ProductDetail> {
                     },
                   ),
                 ),
+                SizedBox(height: 10,),
+                Padding(
+                  padding: const EdgeInsets.only(left:8, right: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Destaques da semana.',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey[700]
+                        ),
+                      ),               
+                    ],
+                  ),
+                ),
                 Container(
-                  height: 250,
+                  height: 270,
                   // color: Colors.yellowAccent,
                   child: 
                   /* TransformerPageView(
@@ -179,6 +203,35 @@ class _ProductDetailState extends State<ProductDetail> {
             ),
           ),
         ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: 60,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Icon(Icons.menu, color: Colors.grey[600]),
+                Container(
+                  // color: Colors.orangeAccent,
+                  width: MediaQuery.of(context).size.width * .2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Icon(Icons.shopping_basket, color: Colors.grey[600],),
+                      Icon(Icons.search, color: Colors.grey[600]),
+                    ],
+                  ),
+                ),
+                
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -188,11 +241,12 @@ class CardList extends StatelessWidget {
   final String title, image;
   final double price;
   final Shoes shoes;
+  final int cardColor;
 
-  const CardList({Key key, this.title, this.image, this.price, this.shoes}) : super(key: key);
+  const CardList({Key key, this.title, this.image, this.price, this.shoes, this.cardColor}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: (){
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => ShoesDetailPage(shoes: shoes,))
@@ -200,64 +254,99 @@ class CardList extends StatelessWidget {
       },
       child: Container(
         // color: Colors.pink,
-        width: 180,
-        padding: EdgeInsets.only(top: 25),
+        width: 200,
+        padding: EdgeInsets.only(top: 0, bottom: 5),
         margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
         child: Stack(
           children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
               child: Container(
-                height: 180,
-                padding: EdgeInsets.fromLTRB(24,30,24,10),
+                height: 200,
+                padding: EdgeInsets.fromLTRB(10,35,14,3),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(16)
+                    Radius.circular(10)
                   ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
-                      blurRadius: 15
+                      blurRadius: 8
                     )
                   ]
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(title,
+                    Text(
+                      title,
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600
                       ),
                     ),
                     
                     Align(
-                      alignment: Alignment.bottomRight,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text("R\$${price.toStringAsFixed(2)}",
-                            style: TextStyle(
-                              color: Colors.grey
-                            ),
+                      alignment: Alignment.bottomCenter,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.favorite_border),
+                            iconSize: 20,
+                            onPressed: (){},
                           ),
-                            Icon(Icons.arrow_forward_ios, color: Colors.grey,),
-                          ],
-                        ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Text(
+                                'R\$199',
+                                style: TextStyle(
+                                  color: Color(0xFFFEB0BA),
+                                  fontSize: 12,
+                                  decorationStyle: TextDecorationStyle.wavy
+                                ),
+                              ),
+                              SizedBox(height: 2,),
+                              Text(
+                                'R\$${price.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                  fontSize: 18
+                                ),                              
+                              ),
+                            ],
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.shopping_cart),
+                            iconSize: 20,
+                            onPressed: (){},
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
               ),
             ),
             Positioned(
-              top: -17,
+              top: -10,
               left: 0,
               right: 0,
               child: Align(
                 alignment: Alignment.topCenter,
-                child: Image.asset(image, fit: BoxFit.fill,width: 120,),
+                child: Hero(
+                  tag: title,
+                  child: Image.asset(
+                    image,
+                    fit: BoxFit.fill,
+                    width: 130,
+                    height: 100,
+                  )
+                ),
               ),
             ),
           ],
