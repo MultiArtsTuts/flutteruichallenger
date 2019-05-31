@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
       body: ProductDetail(),
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.amber[200],
+        animationDuration: Duration(milliseconds: 300),
         color: Colors.grey[100],
         height: 50,
         items: <Widget>[

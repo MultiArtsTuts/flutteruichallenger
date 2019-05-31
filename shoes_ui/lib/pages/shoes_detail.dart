@@ -35,11 +35,10 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      
+    return Scaffold( 
       backgroundColor: Color(0xFF1B2330),
       body: Stack(
+        fit: StackFit.passthrough,
         children: <Widget>[
           ClipPath(
             clipper: MyClipper(),
