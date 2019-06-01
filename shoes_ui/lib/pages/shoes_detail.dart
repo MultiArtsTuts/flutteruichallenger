@@ -37,6 +37,7 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold( 
       backgroundColor: Color(0xFF1B2330),
+      
       body: Stack(
         fit: StackFit.passthrough,
         children: <Widget>[
@@ -60,16 +61,20 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
           Positioned(
             bottom: -85,
             right: -95,
-            child: Image.asset(
-                widget.shoes.brandImage,
-                color: Color(0xFF515C73).withOpacity(.05),
-                width: 400,
-                height: 300,
-              ),
+            child: Container(
+              // color: Colors.purple,
+              child: Image.asset(
+                  widget.shoes.brandImage,
+                  color: Color(0xFF515C73).withOpacity(.05),
+                  width: 400,
+                  height: 300,
+                ),
+            ),
           ),
           SafeArea(
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(top: 50),
+              padding: EdgeInsets.only(top: 50, bottom: 40),
+              scrollDirection: Axis.vertical,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

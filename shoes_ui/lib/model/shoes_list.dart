@@ -93,3 +93,6 @@ class ShoesList {
 // naty_smith17
 // _dayasilva6
 // _maariiaeduaarda
+// estherr16_
+// mah_tavaress_ 
+// lovattelyjacke
