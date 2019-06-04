@@ -23,7 +23,7 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
   @override
   void initState() {
     super.initState();
-    // _controller = PageController(viewportFraction: 1);
+    // _controller = PageController(viewportFraction: 1, initialPage: currentPage);
     _pageController = TransformerPageController(viewportFraction: 1, initialPage: currentPage);
   }
 
@@ -113,22 +113,6 @@ class _ShoesDetailPageState extends State<ShoesDetailPage> {
                         Container(
                           height: 170,
                           child: _images()
-                          /* TransformerPageView(
-                            pageController: _pageController,
-                            transformer: ZoomOutPageTransformer(),
-                            itemCount: widget.shoes.pictures.length,
-                            itemBuilder: (context, i){
-                              var images = widget.shoes.pictures;
-                              return Align(
-                                alignment: Alignment.topRight,
-                                child: Image.asset(
-                                images[i],
-                                width: 400,
-                                height: 190, 
-                                ),
-                              );                                             
-                            },
-                          ), */
                         ),
                         SizedBox(height: 15,),                  
                         PageIndicator(

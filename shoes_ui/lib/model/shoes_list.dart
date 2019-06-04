@@ -9,6 +9,7 @@ class ShoesList {
       description: "Be Bold with Nike Air Max 270",
       colors: "White / Orange",
       price: 150,
+      active: false,
       sizeNumList: [
         "36","38","40","42","44"
       ],
@@ -25,6 +26,7 @@ class ShoesList {
       description: "Be Bold with Nike Air Max 270, featured fresh new materials, head turning colourrways, and Nike\'s tallest Air units ever",
       colors: "Aqua/Eletric Blue",
       price: 170,
+      active: true,
       sizeNumList: [
         "47","42","38","40"
       ],
@@ -41,6 +43,7 @@ class ShoesList {
       description: "Be Bold with Nike Air Max 270, featured fresh new materials, head turning colourrways, and Nike\'s tallest Air units ever",
       colors: "Red/White",
       price: 170,
+      active: false,
       sizeNumList: [
         "28","32","36","47","42","38","40"
       ],
@@ -57,6 +60,7 @@ class ShoesList {
       description: "Be Bold with Nike Air Max 270, featured fresh new materials, head turning colourrways, and Nike\'s tallest Air units ever",
       colors: "Red/White",
       price: 170,
+      active: false,
       sizeNumList: [
         "28","32","36","47","42","38","40"
       ],
@@ -73,6 +77,7 @@ class ShoesList {
       description: "Be Bold with Adidas didas 270, featured fresh new materials, head turning colourrways, and Nike\'s tallest Air units ever",
       colors: "Laranja/Rosa/Vermelhos",
       price: 170,
+      active: true,
       sizeNumList: [
         "28","32","36","47","42","38","40"
       ],
@@ -85,8 +90,8 @@ class ShoesList {
     ),
   ];
 
-  static Shoes getShoesByTitle(title){
-    return shoesList.where((p) => p.title == title).first;
+  static Shoes getShoesByTitle(active){
+    return shoesList.where((p) => p.active == true).first;
   }
 }
 

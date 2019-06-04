@@ -5,6 +5,7 @@ class Shoes {
   final String brandTitle;
   final String brandImage;
   final double price;
+  final bool active;
   final List<String> sizeNumList;
   final List<String> pictures;
 
@@ -17,6 +18,7 @@ class Shoes {
       this.brandTitle,
       this.brandImage,
       this.price,
+      this.active,
       this.sizeNumList,
       this.pictures})
       : assert(price != null);
@@ -28,6 +30,7 @@ class Shoes {
       String brandTitle,
       String brandImage,
       double price,
+      bool active,
       List sizeNumList,
       List pictures}) {
     return Shoes(
@@ -37,6 +40,7 @@ class Shoes {
       brandTitle: brandTitle ?? this.brandTitle,
       brandImage: brandImage ?? this.brandImage,
       price: price ?? this.price,
+      active: active ?? this.active,
       sizeNumList: sizeNumList ?? this.sizeNumList,
       pictures: pictures ?? this.pictures,
     );
